@@ -1,7 +1,6 @@
 ---
-import Hello from "../components/Hello";
+import Navbar from "../components/Navbar.astro";
 ---
 
-<div>
-	<Hello client:load />
-</div>
+<Navbar title="GMTrips" />
+<slot />
