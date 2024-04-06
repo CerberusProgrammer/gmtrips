@@ -1,0 +1,11 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import FormCreateTrip from "../../components/FormCreateTrip";
+---
+
+<Layout title="Nueva ruta">
+  <p class="text-xl">Nueva ruta</p>
+  <div class="flex items-center justify-center h-full">
+    <FormCreateTrip client:load />
+  </div>
+</Layout>

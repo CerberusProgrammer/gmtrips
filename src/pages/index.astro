@@ -1,5 +1,6 @@
 ---
 import Card from "../components/Card.tsx";
+import TextButton from "../components/TextButton";
 import Layout from "../layouts/Layout.astro";
 import type { Trip } from "../models/Trip";
 
@@ -24,22 +25,9 @@ const data: Trip = {
 };
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GMTrips</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <Layout>
-      <Card trip={data} client:idle />
-    </Layout>
-  </body>
-</html>
+<Layout>
+  <Card trip={data} client:idle />
+  <div class="mt-2">
+    <TextButton title="Ver rutas" url="/routes" client:load />
+  </div>
+</Layout>

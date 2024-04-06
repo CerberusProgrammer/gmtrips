@@ -1,27 +1,16 @@
+---
+import DrawerButton from "../components/DrawerButton";
+import FilledButton from "../components/FilledButton";
+---
+
 <div class="rounded shadow-sm items-center w-96 py-8 px-8">
   <h1 class="text-3xl font-bold text-center">GMTrips</h1>
   <div class="mt-8"></div>
   <div class="grid grid-cols-1 space-y-2">
-    <button
-      class="w-full rounded-xl px-4 py-2 text-start font-bold opacity-50 hover:opacity-80 hover:bg-slate-100 transform active:scale-90 transition duration-150"
-      >Inicio</button
-    >
-    <button
-      class="w-full rounded-xl px-4 py-2 text-start font-bold opacity-50 hover:opacity-80 hover:bg-slate-100 transform active:scale-90 transition duration-150"
-      >Rutas</button
-    >
-    <button
-      class="w-full rounded-xl px-4 py-2 text-start font-bold opacity-50 hover:opacity-80 hover:bg-slate-100 transform active:scale-90 transition duration-150"
-      >Tarifas</button
-    >
-    <button
-      class="w-full rounded-xl px-4 py-2 text-start font-bold opacity-50 hover:opacity-80 hover:bg-slate-100 transform active:scale-90 transition duration-150"
-      >Estaciones</button
-    >
-    <button
-      class="w-full bg-orange-500 text-white font-bold py-2 rounded-md mb-2 hover:bg-orange-600 transform active:scale-90 transition duration-150"
-    >
-      Generar ruta
-    </button>
+    <DrawerButton title="Inicio" url="/" />
+    <DrawerButton title="Rutas" url="/" />
+    <DrawerButton title="Tarifas" url="/" />
+    <DrawerButton title="Estaciones" url="/" />
+    <FilledButton title="Generar ruta" url="/routes/create/" client:idle />
   </div>
 </div>
