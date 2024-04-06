@@ -6,15 +6,19 @@ import type { Trip } from "../models/Trip";
 const data: Trip = {
   fromCity: "Mexicali",
   toCity: "Tijuana",
-  fromCityDate: "",
-  toCityDate: "",
+  fromCityDate: "12/12/2020",
+  toCityDate: "12/12/2021",
   routes: [
     {
-      name: "string",
-      state: "string",
-      road: "string",
+      name: "El Hongo",
+      state: "Baja California",
+      road: "HMXLI200",
       length: 0,
-      time: "string",
+      time: "3.4",
+      stand: {
+        name: "Peaje El Hongo",
+        vehicles: [{ name: "Camion 3 Ejes", cost: 10 }],
+      },
     },
   ],
 };
@@ -26,10 +30,16 @@ const data: Trip = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GMTrips</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <Layout>
-      <Card trip={data} />
+      <Card trip={data} client:idle />
     </Layout>
   </body>
 </html>

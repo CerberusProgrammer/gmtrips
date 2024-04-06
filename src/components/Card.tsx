@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Trip } from "../models/Trip.ts";
 
 interface CardProps {
@@ -5,21 +6,69 @@ interface CardProps {
 }
 
 export default function Card({ trip }: CardProps) {
+  const handleTap = () => {
+    console.log("Hola!");
+  };
+
+  const getTotalDistance = () => {
+    const calculatedDistance = trip.routes.map((route) => {
+      return route.length;
+    });
+
+    let totalDistance = calculatedDistance.reduce((a, b) => a + b, 0);
+
+    return totalDistance;
+  };
+
+  const getTotalCost = () => {
+    let totalCost = trip.routes.reduce((total, route) => {
+      if (route.stand) {
+        let standCost = route.stand.vehicles.reduce(
+          (total, vehicle) => total + vehicle.cost,
+          0
+        );
+        return total + standCost;
+      } else {
+        return total;
+      }
+    }, 0);
+
+    return totalCost;
+  };
+
+  const getTransport = () => {
+    for (let route of trip.routes) {
+      if (route.stand) {
+        for (let vehicle of route.stand.vehicles) {
+          if (vehicle.name) {
+            return vehicle.name;
+          }
+        }
+      }
+    }
+    return "Sin vehiculo";
+  };
+
   return (
-    <>
-      <div className="stats shadow">
-        <div className="stat">
-          <div className="stat-title">Total Page Views</div>
-          <div className="stat-value">
-            {trip.fromCity} - {trip.toCity}
+    <div className=" bg-white rounded-xl shadow-sm m-2 transform active:scale-90 transition duration-150">
+      <div className="p-8 grid grid-cols-2">
+        <div>
+          <div className=" tracking-wide text-4xl text-gray-900 font-bold">
+            {trip.fromCity} a {trip.toCity}
           </div>
-          <div className="stat-desc">
-            {trip.routes.map((route) => (
-              <p>{route.name}</p>
-            ))}
-          </div>
+          <p className="mt-2 text-gray-500">
+            {trip.fromCityDate} - {trip.toCityDate}
+          </p>
         </div>
-      </div>{" "}
-    </>
+
+        <div>
+          <p className="text-4xl font-bold">{getTransport()}</p>
+          <p>{getTotalDistance()} KM</p>
+          <p className="text-orange-500 font-bold text-4xl">
+            ${getTotalCost()} MXN
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
