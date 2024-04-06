@@ -1,3 +1,10 @@
-<div class="bg-gray-100 py-16 px-16">
-  <slot />
+---
+import Drawer from "./Drawer.astro";
+---
+
+<div class="flex h-screen">
+  <Drawer />
+  <div class="bg-gray-100 py-8 px-8 w-full">
+    <slot />
+  </div>
 </div>
