@@ -20,6 +20,16 @@ export default function Card({ trip }: CardProps) {
     return totalDistance;
   };
 
+  const getTotalTime = () => {
+    const calculatedTime = trip.routes.map((route) => {
+      return route.time;
+    });
+
+    let totalTime = calculatedTime.reduce((a, b) => a + b, 0);
+
+    return totalTime;
+  };
+
   const getTotalCost = () => {
     let totalCost = trip.routes.reduce((total, route) => {
       if (route.stand) {
@@ -50,14 +60,20 @@ export default function Card({ trip }: CardProps) {
   };
 
   return (
-    <div className=" bg-white rounded-xl shadow-sm m-2 transform active:scale-90 transition duration-150">
-      <div className="p-8 grid grid-cols-2">
+    <button
+      className=" bg-white rounded-xl w-full shadow-sm transform active:scale-90 transition duration-150 text-center"
+      onClick={() => handleTap()}
+    >
+      <div className="p-8 md:grid grid-cols-2">
         <div>
           <div className=" tracking-wide text-4xl text-gray-900 font-bold">
             {trip.fromCity} a {trip.toCity}
           </div>
           <p className="mt-2 text-gray-500">
             {trip.fromCityDate} - {trip.toCityDate}
+          </p>
+          <p className="text-orange-500 font-bold text-4xl">
+            {getTotalTime()} Horas
           </p>
         </div>
 
@@ -69,6 +85,6 @@ export default function Card({ trip }: CardProps) {
           </p>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

@@ -5,6 +5,6 @@ export interface Route {
   state: string;
   road: string;
   length: number;
-  time: string;
+  time: number;
   stand?: Stand;
 }
