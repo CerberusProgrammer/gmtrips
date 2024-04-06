@@ -1,4 +1,3 @@
-import React from "react";
 import type { Trip } from "../models/Trip.ts";
 
 interface CardProps {
@@ -8,13 +7,17 @@ interface CardProps {
 export default function Card({ trip }: CardProps) {
   return (
     <>
-      <div class="stats shadow">
-        <div class="stat">
-          <div class="stat-title">Total Page Views</div>
-          <div class="stat-value">
+      <div className="stats shadow">
+        <div className="stat">
+          <div className="stat-title">Total Page Views</div>
+          <div className="stat-value">
             {trip.fromCity} - {trip.toCity}
           </div>
-          <div class="stat-desc">21% more than last month</div>
+          <div className="stat-desc">
+            {trip.routes.map((route) => (
+              <p>{route.name}</p>
+            ))}
+          </div>
         </div>
       </div>{" "}
     </>
