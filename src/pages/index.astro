@@ -1,6 +1,14 @@
 ---
+import Card from "../components/Card.tsx";
 import Hello from "../components/Hello";
 import Layout from "../layouts/Layout.astro";
+import type { Trip } from "../models/Trip";
+
+const data: Trip = {
+  fromCity: "Mexicali",
+  toCity: "Tijuana",
+  routes: [],
+};
 ---
 
 <!doctype html>
@@ -13,6 +21,7 @@ import Layout from "../layouts/Layout.astro";
   <body>
     <Layout>
       <Hello client:load />
+      <Card trip={data} />
     </Layout>
   </body>
 </html>
