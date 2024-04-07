@@ -9,5 +9,6 @@ export interface Trip {
   travel_cost: number;
   total_cost: number;
   gasoline_cost: number;
+  passengers: number;
   routes: Route[];
 }

@@ -1,49 +1,37 @@
-import { useState } from "react";
 import type { Trip } from "../models/Trip.ts";
 
 interface CardProps {
   trip: Trip;
 }
 
-export default function Card({ trip }: CardProps) {
+export default function TripCard({ trip }: CardProps) {
   const handleTap = () => {
-    console.log("Hola!");
+    window.location.href = `/routes/${trip.id}/`;
   };
 
   const getTotalDistance = () => {
     const calculatedDistance = trip.routes.map((route) => {
-      return route.length;
+      return parseFloat(`${route.length}`);
     });
 
     let totalDistance = calculatedDistance.reduce((a, b) => a + b, 0);
+
+    totalDistance = +totalDistance.toFixed(2);
 
     return totalDistance;
   };
 
   const getTotalTime = () => {
     const calculatedTime = trip.routes.map((route) => {
-      return route.time;
+      const [hours, minutes] = route.time.split(":").map(Number);
+      return hours + minutes / 60;
     });
 
     let totalTime = calculatedTime.reduce((a, b) => a + b, 0);
 
+    totalTime = +totalTime.toFixed(2);
+
     return totalTime;
-  };
-
-  const getTotalCost = () => {
-    let totalCost = trip.routes.reduce((total, route) => {
-      if (route.stand) {
-        let standCost = route.stand.vehicles.reduce(
-          (total, vehicle) => total + vehicle.cost,
-          0
-        );
-        return total + standCost;
-      } else {
-        return total;
-      }
-    }, 0);
-
-    return totalCost;
   };
 
   const getTransport = () => {
@@ -67,11 +55,13 @@ export default function Card({ trip }: CardProps) {
       <div className="p-8 md:grid grid-cols-2">
         <div>
           <div className=" tracking-wide text-4xl text-gray-900 font-bold">
-            {trip.fromCity} a {trip.toCity}
+            {trip.from_city} a {trip.to_city}
           </div>
           <p className="mt-2 text-gray-500">
-            {trip.fromCityDate} - {trip.toCityDate}
+            {new Date(trip.from_city_date).toLocaleString()} -{" "}
+            {new Date(trip.to_city_date).toLocaleString()}
           </p>
+
           <p className="text-orange-500 font-bold text-4xl">
             {getTotalTime()} Horas
           </p>
@@ -81,7 +71,7 @@ export default function Card({ trip }: CardProps) {
           <p className="text-4xl font-bold">{getTransport()}</p>
           <p>{getTotalDistance()} KM</p>
           <p className="text-orange-500 font-bold text-4xl">
-            ${getTotalCost()} MXN
+            ${trip.total_cost} MXN
           </p>
         </div>
       </div>
