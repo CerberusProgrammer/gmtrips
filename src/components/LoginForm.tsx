@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Dialog from "./Dialog";
+import { domain } from "../domain";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
@@ -34,7 +36,7 @@ export default function LoginForm() {
       return;
     }
 
-    const response = await fetch("http://localhost:8000/api-token-auth/", {
+    const response = await fetch(`${domain}/api-token-auth/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,14 +53,13 @@ export default function LoginForm() {
       localStorage.setItem("token", data.token);
       window.location.href = "/";
     } else {
-      console.log(data);
       setErrorMessage(data.non_field_errors[0]);
       setIsDialogOpen(true);
     }
   };
 
   const handleRegister = () => {
-    console.log("Registrando...");
+    window.location.href = "/register";
   };
 
   return (
@@ -77,7 +78,7 @@ export default function LoginForm() {
           value={password}
           placeholder="Contraseña"
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-4 py-3 rounded-md mb-6 font-medium text-lg border-2 border-gray-200"
+          className="w-full px-4 py-3 rounded-md mb-4 font-medium text-lg border-2 border-gray-200"
         />
         <button
           className="btn btn-ghost w-full text-base font-bold py-2 rounded-xl mb-2 bg-orange-500 text-white hover:bg-orange-600 transform active:scale-90 transition duration-150"
@@ -92,21 +93,11 @@ export default function LoginForm() {
           Registrarse
         </button>
         {isDialogOpen && (
-          <dialog id="error_dialog" className="modal">
-            <div className="modal-box">
-              <h3 className="font-bold text-lg">Error</h3>
-              <p className="py-4">{errorMessage}</p>
-              <div className="modal-action">
-                <button
-                  type="button"
-                  className="btn btn-ghost w-full bg-orange-100 text-orange-500 text-base font-bold py-2 rounded-xl mb-2 hover:bg-orange-200 transform active:scale-90 transition duration-150"
-                  onClick={handleCloseDialog}
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
-          </dialog>
+          <Dialog
+            title="Error"
+            message={errorMessage}
+            onClick={handleCloseDialog}
+          ></Dialog>
         )}
       </div>
     </div>
