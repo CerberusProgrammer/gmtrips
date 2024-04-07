@@ -4,6 +4,7 @@ import ListCheckbox from "./ListCheckbox";
 import InputNumber from "./InputNumber";
 import VehiclesSelector from "./VehiclesSelector";
 import FilledButton from "./FilledButton";
+import { domain } from "../domain";
 
 export default function FormCreateTrip() {
   const [initialDestination, setInitialDestination] = useState("");
@@ -37,32 +38,33 @@ export default function FormCreateTrip() {
   }, [initialDestination, finalDestination, passengerCount, vehicleType]);
 
   const handleContinue = async () => {
-    console.log(`Initial Destination: ${initialDestination}`);
-    console.log(`Final Destination: ${finalDestination}`);
-    console.log(`Destinations: ${destinations}`);
-    console.log(`Is Round Trip: ${isRoundTrip}`);
-    console.log(`Passenger Count: ${passengerCount}`);
-    console.log(`Vehicle Type: ${vehicleType}`);
-
     setIsLoading(true);
 
-    const response = await fetch("https://jsonplaceholder.typicode.com/users", {
-      method: "GET",
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${domain}/api/trips/generate/`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
       },
-      // body: JSON.stringify({
-      //   initialDestination,
-      //   finalDestination,
-      //   isRoundTrip,
-      //   passengerCount,
-      //   vehicleType,
-      // }),
+      body: JSON.stringify({
+        destinations: destinations,
+        passengers: passengerCount,
+        vehicle: vehicleType,
+      }),
     });
+    console.log(
+      JSON.stringify({
+        destinations: destinations,
+        passengers: passengerCount,
+        vehicle: vehicleType,
+      })
+    );
 
     const data = await response.json();
     console.log(data);
-    window.location.href = "/routes/";
+    // window.location.href = "/routes/";
 
     setIsLoading(false);
   };

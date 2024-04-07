@@ -1,32 +1,9 @@
 ---
-import Card from "../components/Card.tsx";
 import TextButton from "../components/TextButton";
 import Layout from "../layouts/Layout.astro";
-import type { Trip } from "../models/Trip";
-
-const data: Trip = {
-  fromCity: "Mexicali",
-  toCity: "Tijuana",
-  fromCityDate: "12/12/2020",
-  toCityDate: "12/12/2021",
-  routes: [
-    {
-      name: "El Hongo",
-      state: "Baja California",
-      road: "HMXLI200",
-      length: 0,
-      time: 4.4,
-      stand: {
-        name: "Peaje El Hongo",
-        vehicles: [{ name: "Camion 3 Ejes", cost: 10 }],
-      },
-    },
-  ],
-};
 ---
 
 <Layout>
-  <Card trip={data} client:idle />
   <div class="mt-2">
     <TextButton title="Ver rutas" url="/routes" client:load />
   </div>
