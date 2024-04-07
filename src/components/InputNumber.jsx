@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function InputNumber({ title, onInput }) {
   const handleChange = (event) => {
     onInput(event.target.value);

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function VehiclesSelector({ title, onSelect }) {
   const handleChange = (event) => {
     onSelect(event.target.value);
@@ -15,25 +13,29 @@ export default function VehiclesSelector({ title, onSelect }) {
         <option disabled selected>
           {title}
         </option>
-        <option value="A">Automóviles</option>
-        <option value="B">Autobuses</option>
-        <option value="C">Camiones</option>
-        <option value="1">Motocicleta </option>
-        <option value="10">Camión 3 ejes </option>
-        <option value="11">Camión 4 ejes </option>
-        <option value="12">Camión 5 ejes </option>
-        <option value="13">Camión 6 ejes </option>
-        <option value="14">Camión 7 ejes </option>
-        <option value="15">Camión 8 ejes </option>
-        <option value="16">Camión 9 ejes </option>
-        <option value="2">Automóvil </option>
-        <option value="3">Automóvil remolque 1 eje </option>
-        <option value="4">Automóvil remolque 2 eje </option>
-        <option value="5">Pick Ups </option>
-        <option value="6">Autobus 2 ejes </option>
-        <option value="7">Autobus 3 ejes </option>
-        <option value="8">Autobus 4 ejes </option>
-        <option value="9">Camión 2 ejes </option>
+        <option value="Automóviles">Automóviles</option>
+        <option value="Autobuses">Autobuses</option>
+        <option value="Camiones">Camiones</option>
+        <option value="Motocicleta">Motocicleta</option>
+        <option value="Camión 3 ejes">Camión 3 ejes</option>
+        <option value="Camión 4 ejes">Camión 4 ejes</option>
+        <option value="Camión 5 ejes">Camión 5 ejes</option>
+        <option value="Camión 6 ejes">Camión 6 ejes</option>
+        <option value="Camión 7 ejes">Camión 7 ejes</option>
+        <option value="Camión 8 ejes">Camión 8 ejes</option>
+        <option value="Camión 9 ejes">Camión 9 ejes</option>
+        <option value="Automóvil">Automóvil</option>
+        <option value="Automóvil remolque 1 eje">
+          Automóvil remolque 1 eje
+        </option>
+        <option value="Automóvil remolque 2 eje">
+          Automóvil remolque 2 eje
+        </option>
+        <option value="Pick Ups">Pick Ups</option>
+        <option value="Autobus 2 ejes">Autobus 2 ejes</option>
+        <option value="Autobus 3 ejes">Autobus 3 ejes</option>
+        <option value="Autobus 4 ejes">Autobus 4 ejes</option>
+        <option value="Camión 2 ejes">Camión 2 ejes</option>
       </select>
     </>
   );
