@@ -15,6 +15,8 @@ export default function FormCreateTrip() {
   const [vehicleType, setVehicleType] = useState("");
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
 
   useEffect(() => {
     let newDestinations = [initialDestination, finalDestination];
@@ -29,13 +31,22 @@ export default function FormCreateTrip() {
       initialDestination &&
       finalDestination &&
       passengerCount > 0 &&
-      vehicleType
+      vehicleType &&
+      selectedDate &&
+      selectedTime
     ) {
       setIsButtonEnabled(true);
     } else {
       setIsButtonEnabled(false);
     }
-  }, [initialDestination, finalDestination, passengerCount, vehicleType]);
+  }, [
+    initialDestination,
+    finalDestination,
+    passengerCount,
+    vehicleType,
+    selectedDate,
+    selectedTime,
+  ]);
 
   const handleContinue = async () => {
     setIsLoading(true);
@@ -52,21 +63,37 @@ export default function FormCreateTrip() {
         destinations: destinations,
         passengers: passengerCount,
         vehicle: vehicleType,
+        date: selectedDate,
+        time: selectedTime,
       }),
     });
+
     console.log(
       JSON.stringify({
         destinations: destinations,
         passengers: passengerCount,
         vehicle: vehicleType,
+        date: selectedDate,
+        time: selectedTime,
       })
     );
 
     const data = await response.json();
     console.log(data);
-    // window.location.href = "/routes/";
 
     setIsLoading(false);
+    resetData();
+  };
+
+  const resetData = () => {
+    setInitialDestination("");
+    setFinalDestination("");
+    setDestinations([]);
+    setIsRoundTrip(false);
+    setPassengerCount(0);
+    setVehicleType("");
+    setSelectedDate("");
+    setSelectedTime("");
   };
 
   return (
@@ -91,6 +118,20 @@ export default function FormCreateTrip() {
           </div>
           <div className="mt-2"></div>
           <ListCheckbox onCheck={setIsRoundTrip} />
+          <div className="grid grid-cols-2">
+            <div className="pr-2">
+              <input
+                type="date"
+                onChange={(e) => setSelectedDate(e.target.value)}
+                className="form-control rounded-lg px-4 py-4 w-full font-medium text-lg border-2 border-gray-200"
+              />
+            </div>
+            <input
+              type="time"
+              onChange={(e) => setSelectedTime(e.target.value)}
+              className="form-control rounded-lg px-4 py-4 w-full font-medium text-lg border-2 border-gray-200"
+            />
+          </div>
           <InputNumber
             title="Cantidad de pasajeros"
             onInput={setPassengerCount}
@@ -99,6 +140,7 @@ export default function FormCreateTrip() {
             title="Tipo de vehiculo"
             onSelect={setVehicleType}
           />
+
           <div className="grid grid-cols-2">
             <div></div>
             <FilledButton
