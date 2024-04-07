@@ -53,6 +53,12 @@ export default function FormCreateTrip() {
 
     const token = localStorage.getItem("token");
 
+    // Combina la fecha y la hora en un solo objeto de fecha
+    const dateTime = new Date(`${selectedDate}T${selectedTime}`);
+
+    // Convierte el objeto de fecha a una cadena en formato ISO
+    const isoDateTime = dateTime.toISOString();
+
     const response = await fetch(`${domain}/api/trips/generate/`, {
       method: "POST",
       headers: {
@@ -63,8 +69,7 @@ export default function FormCreateTrip() {
         destinations: destinations,
         passengers: passengerCount,
         vehicle: vehicleType,
-        date: selectedDate,
-        time: selectedTime,
+        datetime: isoDateTime,
       }),
     });
 
@@ -73,8 +78,7 @@ export default function FormCreateTrip() {
         destinations: destinations,
         passengers: passengerCount,
         vehicle: vehicleType,
-        date: selectedDate,
-        time: selectedTime,
+        datetime: isoDateTime,
       })
     );
 
