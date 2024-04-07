@@ -13,6 +13,7 @@ export default function FormCreateTrip() {
   const [passengerCount, setPassengerCount] = useState(0);
   const [vehicleType, setVehicleType] = useState("");
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let newDestinations = [initialDestination, finalDestination];
@@ -35,48 +36,77 @@ export default function FormCreateTrip() {
     }
   }, [initialDestination, finalDestination, passengerCount, vehicleType]);
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     console.log(`Initial Destination: ${initialDestination}`);
     console.log(`Final Destination: ${finalDestination}`);
     console.log(`Destinations: ${destinations}`);
     console.log(`Is Round Trip: ${isRoundTrip}`);
     console.log(`Passenger Count: ${passengerCount}`);
     console.log(`Vehicle Type: ${vehicleType}`);
+
+    setIsLoading(true);
+
+    const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({
+      //   initialDestination,
+      //   finalDestination,
+      //   isRoundTrip,
+      //   passengerCount,
+      //   vehicleType,
+      // }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+    window.location.href = "/routes/";
+
+    setIsLoading(false);
   };
 
   return (
     <>
-      <div className="space-y-2">
-        <div className="grid grid-cols-2">
-          <div className="pr-2">
+      {isLoading ? (
+        <span className="loading loading-spinner loading-lg bg-orange-500"></span>
+      ) : (
+        <div className="space-y-2">
+          <div className="grid grid-cols-2">
+            <div className="pr-2">
+              <TripSelector
+                title="Destino inicial"
+                onSelect={setInitialDestination}
+                disabledValue={finalDestination}
+              />
+            </div>
             <TripSelector
-              title="Destino inicial"
-              onSelect={setInitialDestination}
-              disabledValue={finalDestination}
+              title="Destino final"
+              onSelect={setFinalDestination}
+              disabledValue={initialDestination}
             />
           </div>
-          <TripSelector
-            title="Destino final"
-            onSelect={setFinalDestination}
-            disabledValue={initialDestination}
+          <div className="mt-2"></div>
+          <ListCheckbox onCheck={setIsRoundTrip} />
+          <InputNumber
+            title="Cantidad de pasajeros"
+            onInput={setPassengerCount}
           />
-        </div>
-        <div className="mt-2"></div>
-        <ListCheckbox onCheck={setIsRoundTrip} />
-        <InputNumber
-          title="Cantidad de pasajeros"
-          onInput={setPassengerCount}
-        />
-        <VehiclesSelector title="Tipo de vehiculo" onSelect={setVehicleType} />
-        <div className="grid grid-cols-2">
-          <div></div>
-          <FilledButton
-            title="Generar"
-            enabled={isButtonEnabled}
-            onTap={handleContinue}
+          <VehiclesSelector
+            title="Tipo de vehiculo"
+            onSelect={setVehicleType}
           />
+          <div className="grid grid-cols-2">
+            <div></div>
+            <FilledButton
+              title="Generar"
+              enabled={isButtonEnabled}
+              onTap={handleContinue}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

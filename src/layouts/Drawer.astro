@@ -8,9 +8,14 @@ import FilledButton from "../components/FilledButton";
   <div class="mt-8"></div>
   <div class="grid grid-cols-1 space-y-2">
     <DrawerButton title="Inicio" url="/" />
-    <DrawerButton title="Rutas" url="/" />
+    <DrawerButton title="Rutas" url="/routes" />
     <DrawerButton title="Tarifas" url="/" />
     <DrawerButton title="Estaciones" url="/" />
-    <FilledButton title="Generar ruta" url="/routes/create/" client:idle />
+    <FilledButton
+      title="Generar ruta"
+      url="/routes/create/"
+      onTap={() => {}}
+      client:idle
+    />
   </div>
 </div>
