@@ -5,6 +5,7 @@ import InputNumber from "./InputNumber";
 import VehiclesSelector from "./VehiclesSelector";
 import FilledButton from "./FilledButton";
 import { domain } from "../domain";
+import CircularLoader from "./CircularLoader";
 
 export default function FormCreateTrip() {
   const [initialDestination, setInitialDestination] = useState("");
@@ -53,10 +54,8 @@ export default function FormCreateTrip() {
 
     const token = localStorage.getItem("token");
 
-    // Combina la fecha y la hora en un solo objeto de fecha
     const dateTime = new Date(`${selectedDate}T${selectedTime}`);
 
-    // Convierte el objeto de fecha a una cadena en formato ISO
     const isoDateTime = dateTime.toISOString();
 
     const response = await fetch(`${domain}/api/trips/generate/`, {
@@ -83,7 +82,8 @@ export default function FormCreateTrip() {
     );
 
     const data = await response.json();
-    console.log(data);
+
+    window.location.href = `/routes/${data["id"]}`;
 
     setIsLoading(false);
     resetData();
@@ -103,7 +103,7 @@ export default function FormCreateTrip() {
   return (
     <>
       {isLoading ? (
-        <span className="loading loading-spinner loading-lg bg-orange-500"></span>
+        <CircularLoader></CircularLoader>
       ) : (
         <div className="space-y-2">
           <div className="grid grid-cols-2">
