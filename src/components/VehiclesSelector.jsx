@@ -6,11 +6,12 @@ export default function VehiclesSelector({ title, onSelect }) {
   return (
     <>
       <select
-        onChange={handleChange}
+        defaultValue=""
         name="vehiculos"
+        onChange={handleChange}
         className="select select-bordered select-lg w-full mt-2 font-medium text-lg border-2 border-gray-200"
       >
-        <option disabled selected>
+        <option disabled value="">
           {title}
         </option>
         <option value="Automóviles">Automóviles</option>

@@ -12,6 +12,7 @@ export default function FormCreateTrip() {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
   const [passengerCount, setPassengerCount] = useState(0);
   const [vehicleType, setVehicleType] = useState("");
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
   useEffect(() => {
     let newDestinations = [initialDestination, finalDestination];
@@ -20,6 +21,19 @@ export default function FormCreateTrip() {
     }
     setDestinations(newDestinations);
   }, [initialDestination, finalDestination, isRoundTrip]);
+
+  useEffect(() => {
+    if (
+      initialDestination &&
+      finalDestination &&
+      passengerCount > 0 &&
+      vehicleType
+    ) {
+      setIsButtonEnabled(true);
+    } else {
+      setIsButtonEnabled(false);
+    }
+  }, [initialDestination, finalDestination, passengerCount, vehicleType]);
 
   const handleContinue = () => {
     console.log(`Initial Destination: ${initialDestination}`);
@@ -57,8 +71,8 @@ export default function FormCreateTrip() {
         <div className="grid grid-cols-2">
           <div></div>
           <FilledButton
-            title="Continuar"
-            enabled={true}
+            title="Generar"
+            enabled={isButtonEnabled}
             onTap={handleContinue}
           />
         </div>
