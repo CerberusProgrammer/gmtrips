@@ -1,0 +1,12 @@
+---
+import Trip from "../../components/Trip";
+import Layout from "../../layouts/Layout.astro";
+
+const { id } = Astro.params;
+---
+
+<Layout title="Ruta ">
+  <div class="flex items-center justify-center h-full">
+    <Trip id={id} client:load />
+  </div>
+</Layout>
