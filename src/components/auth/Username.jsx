@@ -8,5 +8,7 @@ export default function Username() {
     setUsername(username);
   }, []);
 
-  return <p>{username}</p>;
+  return (
+    <p className="font-bold opacity-80 text-lg">{username ? username : ""}</p>
+  );
 }

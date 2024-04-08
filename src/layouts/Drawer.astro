@@ -5,7 +5,7 @@ import Logout from "../components/auth/Logout";
 import Username from "../components/auth/Username";
 ---
 
-<div class="flex flex-col h-screen w-96 py-8 px-8 rounded shadow-sm">
+<div class="flex flex-col h-screen w-full sm:w-96 py-8 px-8 rounded shadow-sm">
   <div class="flex mx-auto items-center space-x-4">
     <svg
       width="50"
@@ -37,9 +37,8 @@ import Username from "../components/auth/Username";
     </div>
     <div class="grid grid-cols-3 items-center">
       <div class="col-span-2">
-        <p class="font-bold opacity-80 text-lg">
-          <Username client:load />
-        </p>
+        <Username client:load />
+
         <p class="font-bold opacity-30 text-sm">Administrador</p>
       </div>
       <div class="col-span-1">

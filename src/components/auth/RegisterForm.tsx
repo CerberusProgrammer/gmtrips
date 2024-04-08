@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import Dialog from "../util/Dialog";
 import { domain } from "../../domain";
+import CircularLoader from "../util/CircularLoader";
 
 export default function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const [errorMessage, setErrorMessage] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isDialogOpen) {
@@ -36,6 +37,8 @@ export default function RegisterForm() {
       return;
     }
 
+    setLoading(true);
+
     const response = await fetch(`${domain}/register/`, {
       method: "POST",
       headers: {
@@ -48,6 +51,8 @@ export default function RegisterForm() {
     });
 
     const data = await response.json();
+
+    setLoading(false);
 
     if (response.ok) {
       localStorage.setItem("token", data.token);
@@ -63,7 +68,16 @@ export default function RegisterForm() {
     window.location.href = "/login";
   };
 
-  return (
+  return loading ? (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-10 rounded-lg shadow-sm w-96">
+        <p className="w-full font-bold text-4xl text-center mb-8">GMTrips</p>
+        <div className="w-full flex justify-center">
+          <CircularLoader></CircularLoader>
+        </div>
+      </div>
+    </div>
+  ) : (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-10 rounded-lg shadow-sm w-96">
         <p className="w-full font-bold text-4xl text-center mb-8">GMTrips</p>

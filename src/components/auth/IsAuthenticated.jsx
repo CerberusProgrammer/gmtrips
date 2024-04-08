@@ -13,7 +13,11 @@ export default function IsAuthenticated({ children }) {
   }, []);
 
   if (loading) {
-    return <CircularLoader></CircularLoader>;
+    return (
+      <div className="flex justify-center">
+        <CircularLoader></CircularLoader>
+      </div>
+    );
   } else {
     return <>{children}</>;
   }

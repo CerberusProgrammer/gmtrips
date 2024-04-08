@@ -43,7 +43,7 @@ export default function MyTrips() {
       {error ? (
         <p>Error: {error}</p>
       ) : loading ? (
-        <div className="w-full h-full items-center">
+        <div className="w-full h-full flex justify-center">
           <CircularLoader></CircularLoader>
         </div>
       ) : trips.length > 0 ? (
