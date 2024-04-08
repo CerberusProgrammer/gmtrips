@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Dialog from "./Dialog";
-import { domain } from "../domain";
+import Dialog from "../util/Dialog";
+import { domain } from "../../domain";
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,14 +29,14 @@ export default function LoginForm() {
     (document.getElementById("error_dialog") as HTMLDialogElement).close();
   };
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     if (!username || !password) {
       setErrorMessage("Por favor, introduce tu usuario y contraseña.");
       setIsDialogOpen(true);
       return;
     }
 
-    const response = await fetch(`${domain}/api-token-auth/`, {
+    const response = await fetch(`${domain}/register/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,15 +51,16 @@ export default function LoginForm() {
 
     if (response.ok) {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("username", username);
       window.location.href = "/";
     } else {
-      setErrorMessage(data.non_field_errors[0]);
+      setErrorMessage(data.username[0]);
       setIsDialogOpen(true);
     }
   };
 
-  const handleRegister = () => {
-    window.location.href = "/register";
+  const handleLogin = () => {
+    window.location.href = "/login";
   };
 
   return (
@@ -82,15 +83,15 @@ export default function LoginForm() {
         />
         <button
           className="btn btn-ghost w-full text-base font-bold py-2 rounded-xl mb-2 bg-orange-500 text-white hover:bg-orange-600 transform active:scale-90 transition duration-150"
-          onClick={() => handleLogin()}
-        >
-          Iniciar sesión
-        </button>
-        <button
-          className="btn btn-ghost w-full bg-orange-100 text-orange-500 text-base font-bold py-2 rounded-xl mb-2 hover:bg-orange-200 transform active:scale-90 transition duration-150"
           onClick={() => handleRegister()}
         >
           Registrarse
+        </button>
+        <button
+          className="btn btn-ghost w-full bg-orange-100 text-orange-500 text-base font-bold py-2 rounded-xl mb-2 hover:bg-orange-200 transform active:scale-90 transition duration-150"
+          onClick={() => handleLogin()}
+        >
+          Iniciar sesión
         </button>
         {isDialogOpen && (
           <Dialog

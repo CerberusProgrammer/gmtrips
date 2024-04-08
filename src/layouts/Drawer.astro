@@ -1,23 +1,50 @@
 ---
-import DrawerButton from "../components/DrawerButton";
-import FilledButton from "../components/FilledButton";
+import DrawerButton from "../components/util/DrawerButton";
+import FilledButton from "../components/util/FilledButton";
+import Logout from "../components/auth/Logout";
+import Username from "../components/auth/Username";
 ---
 
-<div class="rounded shadow-sm items-center w-96 py-8 px-8">
-  <h1 class="text-3xl font-bold text-center">GMTrips</h1>
+<div class="flex flex-col h-screen w-96 py-8 px-8 rounded shadow-sm">
+  <div class="flex mx-auto items-center space-x-4">
+    <svg
+      width="50"
+      height="50"
+      viewBox="0 0 69 69"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M69 34.5C69 53.5538 53.5538 69 34.5 69C15.4462 69 0 53.5538 0 34.5C0 15.4462 15.4462 0 34.5 0C53.5538 0 69 15.4462 69 34.5ZM13.5917 34.5C13.5917 46.0473 22.9527 55.4083 34.5 55.4083C46.0473 55.4083 55.4083 46.0473 55.4083 34.5C55.4083 22.9527 46.0473 13.5917 34.5 13.5917C22.9527 13.5917 13.5917 22.9527 13.5917 34.5Z"
+        fill="#FF9E45"></path>
+    </svg>
+
+    <h1 class="text-3xl font-bold text-center">GMTrips</h1>
+  </div>
+
   <div class="mt-8"></div>
-  <div class="grid grid-cols-1 space-y-2">
+  <div class="grid grid-cols-1 space-y-2 overflow-auto">
     <DrawerButton title="Inicio" url="/" />
-    <DrawerButton title="Rutas" url="/routes" />
-    <DrawerButton title="Tarifas" url="/" />
-    <DrawerButton title="Estaciones" url="/" />
-    <FilledButton
-      title="Generar ruta"
-      url="/routes/create/"
-      onTap={() => {}}
-      client:idle
-    />
-    <!-- TODO: Logout option and a user profile view -->
-    <!-- localStorage.removeItem('token'); -->
+  </div>
+  <div class="mt-auto grid grid-cols-1 space-y-2">
+    <div>
+      <FilledButton
+        title="Generar ruta"
+        url="/routes/create/"
+        onTap={() => {}}
+        client:idle
+      />
+    </div>
+    <div class="grid grid-cols-3 items-center">
+      <div class="col-span-2">
+        <p class="font-bold opacity-80 text-lg">
+          <Username client:load />
+        </p>
+        <p class="font-bold opacity-30 text-sm">Administrador</p>
+      </div>
+      <div class="col-span-1">
+        <Logout client:load />
+      </div>
+    </div>
   </div>
 </div>

@@ -3,9 +3,9 @@ import TripSelector from "./TripSelector";
 import ListCheckbox from "./ListCheckbox";
 import InputNumber from "./InputNumber";
 import VehiclesSelector from "./VehiclesSelector";
-import FilledButton from "./FilledButton";
+import FilledButton from "./util/FilledButton";
 import { domain } from "../domain";
-import CircularLoader from "./CircularLoader";
+import CircularLoader from "./util/CircularLoader";
 
 export default function FormCreateTrip() {
   const [initialDestination, setInitialDestination] = useState("");

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { domain } from "../domain";
-import CircularLoader from "./CircularLoader";
+import CircularLoader from "./util/CircularLoader";
 import type { Trip } from "../models/Trip";
 import type { Route } from "../models/Route";
 import RouteCarousel from "./RouteCarousel";
