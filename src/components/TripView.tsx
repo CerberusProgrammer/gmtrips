@@ -106,7 +106,9 @@ export default function TripView({ id }: TripViewProps) {
             </div>
           </div>
           <div className="bg-white rounded-lg shadow-sm px-8 py-4">
-            <p className="font-bold text-2xl ">${trip.total_cost} MXN</p>
+            <p className="font-bold text-3xl text-orange-500">
+              ${trip.total_cost} MXN
+            </p>
             <p className="font-bold text-lg opacity-50">Costo total</p>
           </div>
           <div className="grid grid-cols-2 space-x-2">
