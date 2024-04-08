@@ -8,7 +8,7 @@ export default function TripSelector({ title, onSelect, disabledValue }) {
       <select
         defaultValue=""
         onChange={handleChange}
-        className="select select-bordered select-lg w-full font-medium text-lg border-2 border-gray-200"
+        className="select select-bordered select-lg w-full font-medium text-xl border-2 border-gray-200"
       >
         <option disabled value="">
           {title}

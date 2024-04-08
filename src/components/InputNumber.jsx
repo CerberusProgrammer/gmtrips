@@ -8,7 +8,7 @@ export default function InputNumber({ title, onInput }) {
         onChange={handleChange}
         type="number"
         placeholder={title}
-        className="input input-bordered px-4 py-8 mt-2 w-full font-medium text-lg border-2 border-gray-200"
+        className="input input-bordered px-4 py-8 mt-2 w-full font-medium text-xl border-2 border-gray-200"
       />
     </>
   );

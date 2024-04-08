@@ -127,13 +127,13 @@ export default function FormCreateTrip() {
               <input
                 type="date"
                 onChange={(e) => setSelectedDate(e.target.value)}
-                className="form-control rounded-lg px-4 py-4 w-full font-medium text-lg border-2 border-gray-200"
+                className="form-control rounded-lg px-4 py-4 w-full font-medium text-xl border-2 border-gray-200"
               />
             </div>
             <input
               type="time"
               onChange={(e) => setSelectedTime(e.target.value)}
-              className="form-control rounded-lg px-4 py-4 w-full font-medium text-lg border-2 border-gray-200"
+              className="form-control rounded-lg px-4 py-4 w-full font-medium text-xl border-2 border-gray-200"
             />
           </div>
           <InputNumber

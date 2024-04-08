@@ -9,7 +9,7 @@ export default function VehiclesSelector({ title, onSelect }) {
         defaultValue=""
         name="vehiculos"
         onChange={handleChange}
-        className="select select-bordered select-lg w-full mt-2 font-medium text-lg border-2 border-gray-200"
+        className="select select-bordered select-lg w-full mt-2 font-medium text-xl border-2 border-gray-200"
       >
         <option disabled value="">
           {title}
