@@ -3,10 +3,11 @@ import Trip from "../../components/TripView";
 import Layout from "../../layouts/Layout.astro";
 
 const { id } = Astro.params;
+const numericId = Number(id);
 ---
 
 <Layout title="Ruta ">
   <div class="flex items-center justify-center h-full">
-    <Trip id={id} client:load />
+    <Trip id={numericId} client:load />
   </div>
 </Layout>
